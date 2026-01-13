@@ -1,0 +1,7 @@
+flask
+gunicorn
+crewai
+langchain-google-vertexai
+google-cloud-aiplatform
+python-dotenv
+pandas
