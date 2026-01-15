@@ -20,4 +20,4 @@ steps:
       - '--allow-unauthenticated'
 
   # Add this to your cloudrun deploy arguments in cloudbuild.yaml
-  - '--set-secrets=SERPER_API_KEY=SERPER_API_KEY:latest'
+  - '--set-secrets=SERPER_API_KEY=0560c81beec2ed9f240940cde31e49c469a33bdd:latest'
