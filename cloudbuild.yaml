@@ -1,0 +1,23 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'asia-south1-docker.pkg.dev/$PROJECT_ID/travel-agent-repo/agent-image', '.']
+
+  # Push the image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-south1-docker.pkg.dev/$PROJECT_ID/travel-agent-repo/agent-image']
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'travel-agent-service'
+      - '--image'
+      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/travel-agent-repo/agent-image'
+      - '--region'
+      - 'asia-south1'
+      - '--allow-unauthenticated'
+
+  # Add this to your cloudrun deploy arguments in cloudbuild.yaml
+  - '--set-secrets=SERPER_API_KEY=SERPER_API_KEY:latest'
